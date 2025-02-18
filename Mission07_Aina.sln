@@ -1,0 +1,16 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mission07_Aina", "Mission07_Aina\Mission07_Aina.csproj", "{A64B8350-87A3-4447-9C2F-53079182E759}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A64B8350-87A3-4447-9C2F-53079182E759}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A64B8350-87A3-4447-9C2F-53079182E759}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A64B8350-87A3-4447-9C2F-53079182E759}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A64B8350-87A3-4447-9C2F-53079182E759}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal

@@ -1,0 +1,12 @@
+@model Movie
+
+@{
+    ViewData["Title"] = "Confirmation";
+}
+
+<div class="container text-center mt-5">
+    <h2>Movie Added Successfully!</h2>
+    <p class="lead">You added "<strong>@Model.Title</strong>" to the collection.</p>
+
+    <a asp-controller="Home" asp-action="Index" class="btn btn-primary">Return to Home</a>
+</div>
