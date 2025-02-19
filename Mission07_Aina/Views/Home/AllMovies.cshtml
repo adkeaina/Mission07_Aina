@@ -28,9 +28,9 @@
             <td>@m.Year</td>
             <td>@m.Director</td>
             <td>@m.Rating</td>
-            <td>@m.Edited</td>
+            <td>@(m.Edited == 1 ? "Yes" : "No")</td>
             <td>@m.LentTo</td>
-            <td>@m.CopiedToPlex</td>
+            <td>@(m.CopiedToPlex == 1 ? "Yes" : "No")</td>
             <td>@m.Notes</td>
             <td><a asp-controller="Home" asp-action="Edit" asp-route-id="@m.MovieId" class="btn btn-primary btn-sm">Edit</a></td>
             <td><a asp-controller="Home" asp-action="Delete" asp-route-id="@m.MovieId"

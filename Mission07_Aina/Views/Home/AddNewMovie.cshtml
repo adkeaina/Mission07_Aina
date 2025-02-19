@@ -20,12 +20,12 @@
 
     <div class="mb-3">
         <label asp-for="Title" class="form-label">Movie Title</label>
-        <input class="form-control" asp-for="Title" required>
+        <input class="form-control" asp-for="Title">
     </div>
 
     <div class="mb-3">
         <label asp-for="Year" class="form-label">Release Year</label>
-        <input class="form-control" asp-for="Year" required>
+        <input class="form-control" asp-for="Year">
     </div>
 
     <div class="mb-3">
@@ -72,5 +72,7 @@
         <input class="form-control" asp-for="Notes" maxlength="25">
     </div>
 
-    <button type="submit" class="btn btn-primary">Add Movie</button>
+    <div asp-validation-summary="All" class="text-danger"></div>
+
+    <button type="submit" class="btn btn-primary">@(Model != null ? "Edit" : "Add") Movie</button>
 </form>

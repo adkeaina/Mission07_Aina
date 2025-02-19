@@ -33,6 +33,12 @@ public class HomeController : Controller
     [HttpPost]
     public IActionResult AddNewMovie(Movie movie)
     {
+        if (!ModelState.IsValid)
+        {
+            // Re-populate categories if needed
+            ViewBag.Categories = _context.Categories.ToList();
+            return View(movie); // Re-render the form with validation errors
+        }
         _context.Movies.Add(movie);
         _context.SaveChanges();
         return View("Confirmation", movie);
@@ -58,6 +64,12 @@ public class HomeController : Controller
     [HttpPost]
     public IActionResult Edit(Movie movie)
     {
+        if (!ModelState.IsValid)
+        {
+            // Re-populate categories if needed
+            ViewBag.Categories = _context.Categories.ToList();
+            return View("AddNewMovie", movie);
+        }
         _context.Update(movie);
         _context.SaveChanges();
         return RedirectToAction("AllMovies");
