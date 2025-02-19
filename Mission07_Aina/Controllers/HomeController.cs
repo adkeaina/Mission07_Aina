@@ -1,16 +1,16 @@
 using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Mission07_Aina.Models;
 
 namespace Mission07_Aina.Controllers;
 
 public class HomeController : Controller
 {
-    private readonly ILogger<HomeController> _logger;
-
-    public HomeController(ILogger<HomeController> logger)
+    private JoelHiltonMovieCollectionContext _context;
+    public HomeController(JoelHiltonMovieCollectionContext context)
     {
-        _logger = logger;
+        _context = context;
     }
 
     public IActionResult Index()
@@ -18,14 +18,57 @@ public class HomeController : Controller
         return View();
     }
 
-    public IActionResult Privacy()
+    public IActionResult GetToKnowJoel()
     {
         return View();
     }
-
-    [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-    public IActionResult Error()
+    
+    [HttpGet]
+    public IActionResult AddNewMovie()
     {
-        return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        ViewBag.Categories = _context.Categories.ToList();
+        return View();
+    }
+
+    [HttpPost]
+    public IActionResult AddNewMovie(Movie movie)
+    {
+        _context.Movies.Add(movie);
+        _context.SaveChanges();
+        return View("Confirmation", movie);
+    }
+
+    public IActionResult AllMovies()
+    {
+        var movies = _context.Movies.Include(movie => movie.Category).ToList();
+        return View(movies);
+    }
+
+    [HttpGet]
+    public IActionResult Edit(int id)
+    {
+        Movie movie = _context.Movies
+            .Include(movie => movie.Category)
+            .Single(movie => movie.MovieId == id);
+        
+        ViewBag.Categories = _context.Categories.ToList();
+        return View("AddNewMovie", movie);
+    }
+
+    [HttpPost]
+    public IActionResult Edit(Movie movie)
+    {
+        _context.Update(movie);
+        _context.SaveChanges();
+        return RedirectToAction("AllMovies");
+    }
+
+    public IActionResult Delete(int id)
+    {
+        var movie = _context.Movies.Single(movie => movie.MovieId == id);
+        _context.Movies.Remove(movie);
+        _context.SaveChanges();
+        
+        return RedirectToAction("AllMovies");
     }
 }
